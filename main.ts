@@ -2,17 +2,17 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, l
     game.gameOver(false)
     game.setGameOverEffect(false, effects.blizzard)
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    game.gameOver(true)
-    game.setGameOverEffect(true, effects.confetti)
-})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (pinky.vy == 0) {
         pinky.vy = -200
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite2, location2) {
+    game.gameOver(true)
+    game.setGameOverEffect(true, effects.confetti)
+})
 let pinky: Sprite = null
-scene.setBackgroundColor(9)
+scene.setBackgroundColor(10)
 pinky = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . 3 3 3 . . . . . . . . 
