@@ -16,10 +16,30 @@ def on_b_pressed():
         pinky.vy = -200
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
-def on_on_overlap(sprite2, otherSprite):
-    info.change_score_by(100)
-    sprites.destroy(otherSprite)
-sprites.on_overlap(SpriteKind.player, SpriteKind.coin, on_on_overlap)
+def on_a_pressed():
+    global projectile
+    projectile = sprites.create_projectile_from_sprite(img("""
+            . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . 2 2 . . . . . . . . . . . . 
+                    . . 2 2 2 2 2 . . . . . . . . . 
+                    . . 2 5 5 5 2 2 2 2 . . . . . . 
+                    . . 2 5 5 4 4 4 4 4 4 4 . . . . 
+                    . . 2 5 5 5 2 2 2 2 . . . . . . 
+                    . . 2 2 2 2 2 . . . . . . . . . 
+                    . . 2 2 . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . .
+        """),
+        pinky,
+        100,
+        0)
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
 def on_overlap_tile2(sprite22, location2):
     game.game_over(True)
@@ -30,6 +50,134 @@ scene.on_overlap_tile(SpriteKind.player,
     """),
     on_overlap_tile2)
 
+def on_on_overlap(sprite2, otherSprite):
+    info.change_score_by(100)
+    sprites.destroy(otherSprite)
+sprites.on_overlap(SpriteKind.player, SpriteKind.coin, on_on_overlap)
+
+def on_on_overlap2(sprite3, otherSprite2):
+    sprites.destroy(otherSprite2)
+    animation.run_image_animation(otherSprite2,
+        [img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . 2 2 2 . . . . . . . . 
+                        . . . 2 2 2 2 2 2 2 . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        2 2 2 . . . . . . . 2 2 2 . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . 2 2 2 2 2 2 2 . . . . . . 
+                        . . . . 2 2 . 2 2 . . . . . . . 
+                        . . . . 2 . . . 2 . . . . . . . 
+                        . . 2 2 2 . . . 2 2 2 . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """),
+            img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . 2 2 2 . . . . . . . . 
+                        . . . 2 2 . 2 . 2 2 . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . 2 2 . . . . . . . 2 2 2 . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . 2 2 . 2 2 2 2 . . . . . . 
+                        . . . . 2 2 . 2 2 . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . 2 2 2 . . . 2 2 2 . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """),
+            img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . 2 2 2 . . . . . . . . 
+                        . . . 2 2 . 2 . 2 2 . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . 2 . . . . . . . . 2 . 2 . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . 2 2 . 2 2 . 2 . . . . . . 
+                        . . . . 2 2 . 2 2 . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . 2 2 2 . . . 2 2 2 . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """),
+            img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 2 2 . . . . . . . . 
+                        . . . 2 . . 2 . 2 2 . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . . . . . . . . 2 . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . 2 . . . . . . . . . . 2 . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . 2 . . . . . 
+                        . . . 2 2 . 2 2 . 2 . . . . . . 
+                        . . . . 2 2 . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . 2 2 . . . 2 2 2 . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """),
+            img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 2 . . . . . . . . . 
+                        . . . 2 . . 2 . 2 . . . . . . . 
+                        . . 2 . . . . . . . 2 . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . 2 . . . . . . . . . . . . . 
+                        . 2 . . . . . . . . . . 2 . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . 2 2 . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """),
+            img("""
+                . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . .
+            """)],
+        100,
+        True)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
+
+def on_on_overlap3(sprite4, otherSprite3):
+    info.change_life_by(-1)
+    info.change_score_by(-100)
+    sprites.destroy(otherSprite3)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap3)
+
+bad_guy: Sprite = None
+projectile: Sprite = None
 coin2: Sprite = None
 pinky: Sprite = None
 scene.set_background_color(10)
@@ -321,3 +469,29 @@ for value in tiles.get_tiles_by_type(assets.tile("""
     tiles.set_tile_at(value, assets.tile("""
         transparency16
     """))
+    info.set_life(3)
+
+def on_update_interval():
+    global bad_guy
+    bad_guy = sprites.create(img("""
+            . . . . . . . . . . . . . . . . 
+                    . . . . . 2 2 2 . . . . . . . . 
+                    . . . 2 2 2 2 2 2 2 . . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    2 2 2 . . . . . . . 2 2 2 . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . . 2 2 2 2 2 2 2 . . . . . . 
+                    . . . 2 2 . . . 2 2 . . . . . . 
+                    . . . 2 . . . . . 2 . . . . . . 
+                    . . 2 2 . . . . . 2 2 . . . . . 
+                    . . 2 . . . . . . . 2 . . . . . 
+                    . . . . . . . . . . . . . . . .
+        """),
+        SpriteKind.enemy)
+    tiles.place_on_random_tile(bad_guy, sprites.dungeon.collectible_blue_crystal)
+    bad_guy.follow(pinky, 20)
+game.on_update_interval(2000, on_update_interval)

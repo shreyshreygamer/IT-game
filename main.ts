@@ -431,7 +431,7 @@ for (let value of tiles.getTilesByType(assets.tile`myTile5`)) {
     tiles.setTileAt(value, assets.tile`transparency16`)
     info.setLife(3)
 }
-game.onUpdateInterval(2000, function () {
+game.onUpdateInterval(5000, function () {
     bad_guy = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . 2 2 2 . . . . . . . . 
@@ -451,5 +451,5 @@ game.onUpdateInterval(2000, function () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(bad_guy, sprites.dungeon.collectibleBlueCrystal)
-    bad_guy.follow(pinky, 20)
+    bad_guy.follow(pinky, 5)
 })
