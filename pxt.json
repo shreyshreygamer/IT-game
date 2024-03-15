@@ -1,9 +1,10 @@
 {
-    "name": "MAIN IT GAME ",
+    "name": "MAIN IT GAME  - Copy",
     "description": "",
     "dependencies": {
         "device": "*",
-        "Timers": "github:microsoft/arcade-timers#v1.1.0"
+        "Timers": "github:microsoft/arcade-timers#v1.1.0",
+        "controller": "*"
     },
     "files": [
         "main.blocks",
@@ -18,11 +19,11 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.12.47",
+        "target": "1.12.49",
         "targetId": "arcade"
     },
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "pyprj"
 }
